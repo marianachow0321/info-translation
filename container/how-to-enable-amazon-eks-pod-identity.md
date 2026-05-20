@@ -26,35 +26,35 @@ EKS Pod Identity 是 Amazon EKS（Elastic Kubernetes Service）推出的一项�
 
 创建一个 IAM 角色，并将信任策略中的 Principal 设置为 `pods.eks.amazonaws.com`。
 
-![创建 IAM 角色](https://repost.aws/media/postImages/original/IMfyEyXBP1S72Yp4U2gzc6EA)
+![创建 IAM 角色](images/eks-pod-identity/01-create-iam-role.png)
 
-![信任策略配置](https://repost.aws/media/postImages/original/IMgUEeocpPS_m8BC1DxaLhCw)
+![信任策略配置](images/eks-pod-identity/02-trust-policy.png)
 
 ## 步骤 2：在集群上安装 "Amazon EKS Pod Identity Agent" 插件并验证 DaemonSet 运行状态
 
 在 EKS 控制台中：
 
-![EKS 集群插件页面](https://repost.aws/media/postImages/original/IMTOKa1HEaSFKD7JMYL7V6VA)
+![EKS 集群插件页面](images/eks-pod-identity/03-cluster-addons.png)
 
 点击 **获取更多插件（Get more Add-ons）**
 
-![获取更多插件](https://repost.aws/media/postImages/original/IME7wOaH0xRDik9CGPQUqiQA)
+![获取更多插件](images/eks-pod-identity/04-get-more-addons.png)
 
 选中 **EKS Pod Identity Agent** 并点击下一步
 
-![选择 EKS Pod Identity Agent](https://repost.aws/media/postImages/original/IMQ7tk9v8PQCS1yc10r7obZA)
+![选择 EKS Pod Identity Agent](images/eks-pod-identity/05-select-pod-identity-agent.png)
 
-![插件配置](https://repost.aws/media/postImages/original/IMtJY9to7qQSOBgKyoEK3z3g)
+![插件配置](images/eks-pod-identity/06-addon-config.png)
 
-![确认安装](https://repost.aws/media/postImages/original/IMHIyiqYPDQBK68taDSZQr9A)
+![确认安装](images/eks-pod-identity/07-confirm-install.png)
 
 点击 **创建（Create）**：
 
-![创建插件](https://repost.aws/media/postImages/original/IM0PK8XxuyTxuUFR0GKKWhhA)
+![创建插件](images/eks-pod-identity/08-create-addon.png)
 
 这将在 `kube-system` 命名空间中启动 EKS Pod Identity DaemonSet。
 
-![DaemonSet 运行状态](https://repost.aws/media/postImages/original/IMeYATpsj9Qpir9pT-Ww50sg)
+![DaemonSet 运行状态](images/eks-pod-identity/09-daemonset-running.png)
 
 **命令行方式：**
 
@@ -69,19 +69,19 @@ aws eks create-addon \
 
 1. 确认 Pod 使用的 Service Account
 
-![确认 Service Account](https://repost.aws/media/postImages/original/IMMA7zVLpdTfO4IDrLzMKAow)
+![确认 Service Account](images/eks-pod-identity/10-service-account.png)
 
 2. 在 EKS 控制台中，选择集群并进入 **访问（Access）** 选项卡，在 "Pod Identity Associations" 部分点击 **创建 Pod Identity 关联（Create Pod Identity association）**
 
-![创建 Pod Identity 关联](https://repost.aws/media/postImages/original/IM40PjfWvoRGehxI9l9CThbw)
+![创建 Pod Identity 关联](images/eks-pod-identity/11-create-association.png)
 
 3. 选择 IAM 角色、命名空间和 Service Account，然后点击 **创建（Create）**
 
-![选择角色和命名空间](https://repost.aws/media/postImages/original/IMyitrwI2oSV-BFhrJzK6GKg)
+![选择角色和命名空间](images/eks-pod-identity/12-select-role-namespace.png)
 
 4. 创建完成后，EKS 控制台的访问选项卡中将显示该关联条目
 
-![关联条目](https://repost.aws/media/postImages/original/IMrvM8y8dRRfyGAMFhegm5QQ)
+![关联条目](images/eks-pod-identity/13-association-entry.png)
 
 ## 步骤 4：使用 Service Account 验证访问权限
 
